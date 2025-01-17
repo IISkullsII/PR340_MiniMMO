@@ -1,0 +1,20 @@
+.unity-label {
+    padding: 2px 4px;
+    margin: 4px 8px;
+}
+
+.info-title {
+    -unity-font-style: bold;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: row;
+    
+    margin: 4px;
+}
+
+.info-row .unity-label {
+    padding: 2px 4px;
+    margin: 0;
+}
