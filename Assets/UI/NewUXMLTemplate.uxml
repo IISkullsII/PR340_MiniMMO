@@ -15,7 +15,7 @@
     <ui:VisualElement name="LoginHUD" class="container active" style="flex-grow: 1;">
         <ui:VisualElement name="LoginBox" class="login-box" style="flex-grow: 1; translate: -50% -50%; width: 320px;">
             <ui:Label tabindex="-1" text="Player creation" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BoxTitle" class="title" style="font-size: 18px;" />
-            <ui:TextField picking-mode="Ignore" label="Playername" value="filler text" name="PlayerNameInput" style="opacity: 1; flex-direction: column; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:TextField picking-mode="Ignore" label="Playername" value="Anonymous" name="PlayerNameInput" max-length="32" style="opacity: 1; flex-direction: column; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             <ui:Button text="Submit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SubmitBtn" style="-unity-text-align: middle-center; white-space: nowrap; text-overflow: clip; flex-direction: column; margin-top: 24px;" />
         </ui:VisualElement>
     </ui:VisualElement>

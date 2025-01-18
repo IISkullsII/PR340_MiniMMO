@@ -46,7 +46,7 @@ public class ServerScript : MonoBehaviour
         
         GameObject playerGameObject = Instantiate(NetworkManager.Singleton.GetNetworkPrefabOverride(playerPrefab));
         NetworkObject instanceNetworkObject = playerGameObject.GetComponent<NetworkObject>();
-        instanceNetworkObject.Spawn();
+        instanceNetworkObject.SpawnWithOwnership(playerID);
         PlayerState instancePlayerState = playerGameObject.GetComponent<PlayerState>();
         instancePlayerState.SetPlayerInfo(playerData);
         
@@ -62,7 +62,7 @@ public class ServerScript : MonoBehaviour
         }
         catch (Exception e)
         {
-            // ignored
+            Debug.Log(e.Message);
         }
     }
 

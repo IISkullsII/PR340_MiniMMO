@@ -41,6 +41,6 @@ public class LoginUIScript : MonoBehaviour
     {
         Debug.Log($"Player submitted PlayerName: {_playerNameInput.value}");
         ClientScript.Instance.SetPlayerName(_playerNameInput.value);
-        ClientScript.Instance.ConnectToServer();
+        ClientScript.Instance.RequestPlayer();
     }
 }

@@ -20,6 +20,26 @@ public class MovementNetworkController : NetworkBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        Position.OnValueChanged += OnPositionChanged;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        Position.OnValueChanged -= OnPositionChanged;
+    }
+
+    private void OnPositionChanged(Vector3 previousvalue, Vector3 newvalue)
+    {
+        if(!IsOwner)
+        {
+            transform.position = Position.Value;
+        }
+    }
+
     void Update()
     {
         if (IsOwner && !IsServer)

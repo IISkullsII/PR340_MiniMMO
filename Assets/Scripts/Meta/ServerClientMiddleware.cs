@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -21,10 +22,10 @@ public class ServerClientMiddleware : NetworkBehaviour
 
     // Client -> Server
     [Rpc(SendTo.Server)]
-    public void RequestPlayerRPC(string playerName, RpcParams rpcParams = default)
+    public void RequestPlayerRPC(FixedString64Bytes playerName, RpcParams rpcParams = default)
     {
         Debug.Log("RequestPlayerRPC: Received");
-        PlayerData playerData = ServerScript.Instance.AddPlayer(rpcParams.Receive.SenderClientId, playerName);
+        PlayerData playerData = ServerScript.Instance.AddPlayer(rpcParams.Receive.SenderClientId, playerName.ToString());
         SubmitPlayerRPC(playerData, RpcTarget.Single(rpcParams.Receive.SenderClientId, RpcTargetUse.Temp));
     }
     

@@ -23,25 +23,28 @@ public class ClientScript : MonoBehaviour
 
     public void Start()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        // NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         _localPlayerData = new PlayerData();
     }
 
     private void OnClientConnected(ulong obj)
     {
-        Debug.Log("OnClientConnected: RequestPlayerRPC triggered");
-        ServerClientMiddleware.Instance.RequestPlayerRPC(_localPlayerData.PlayerName);
+    }
+
+    public void RequestPlayer()
+    {
+        if (ServerClientMiddleware.Instance == null)
+        {
+            Debug.Log("No server instance found. Start a server instance.");
+            return;
+        }
         
+        ServerClientMiddleware.Instance.RequestPlayerRPC(_localPlayerData.PlayerName);
         // SendRequestToSpawnToServer
         // GetInformationForSpawnBack
         //  PlayerName - IsLocalAvailable
         //  PlayerColor
         //  PlayerID - IsSynchedByCallback
-    }
-
-    public void ConnectToServer()
-    {
-        NetworkManager.Singleton.StartClient();
     }
 
     public void SetPlayerName(string playerName)
@@ -52,6 +55,8 @@ public class ClientScript : MonoBehaviour
     public void OnRecievePlayerData(PlayerData playerData)
     {
         _localPlayerData = playerData;
-        Debug.Log($"[OnReceivePlayerData] PlayerName: {playerData.PlayerColor.ToString()}");
+        Debug.Log($"[OnReceivePlayerData] PlayerName: {playerData.PlayerName}");
+        
+        UIController.SetContainerActive("IngameHUD");
     }
 }
