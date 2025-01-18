@@ -45,7 +45,7 @@ public class NetworkMetaData : NetworkBehaviour
     {
         if (IsServer)
         {
-            _serverUptimeCount.Value += 0.1f;
+            // _serverUptimeCount.Value += 0.1f;
         }
     }
     

@@ -7,6 +7,7 @@ public class MovementNetworkController : NetworkBehaviour
 
     public NetworkVariable<Vector3> Position = new();
 
+    [SerializeField] private float speed = 5.0f;
     private Rigidbody _rigidbody;
     
 
@@ -28,14 +29,14 @@ public class MovementNetworkController : NetworkBehaviour
             float moveX = Input.GetAxis("Horizontal");
             float moveZ = Input.GetAxis("Vertical");
 
-            Vector3 movement = 5 * Time.deltaTime * new Vector3(moveX, 0f, moveZ);
-            t.Translate(movement, Space.World);
+            Vector3 velocity = speed * Time.deltaTime * new Vector3(moveX, _rigidbody.velocity.y, moveZ);
 
             if (Input.GetButton("Jump"))
             {
                 _rigidbody.AddForce(Vector3.up * 10.0f);
             }
-
+            
+            t.Translate(velocity, Space.World);
             SubmitPositionRequestServerRPc(t.position);
         }
 

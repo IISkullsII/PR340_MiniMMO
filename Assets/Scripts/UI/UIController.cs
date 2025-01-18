@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private UIDocument rootDocument;
     public Label ServerUptimeField { get; private set; }
     public Label ConnectedClientsField { get; private set; }
+    
 
     public void Awake()
     {
@@ -32,5 +34,28 @@ public class UIController : MonoBehaviour
 
         ConnectedClientsField = rootDocument.rootVisualElement.Q<Label>("ConnectedClientsVal");
         Assert.IsNotNull(ConnectedClientsField);
+    }
+
+
+    public static void SetLabelValue(string labelID, string labelValue)
+    {
+        Label labelElement = Instance.rootDocument.rootVisualElement.Q<Label>(labelID);
+        if (labelElement == null) return;
+        labelElement.text = labelValue;
+    }
+
+
+    public static void SetContainerActive(string containerID)
+    {
+        VisualElement containerElement = Instance.rootDocument.rootVisualElement.Q<VisualElement>(containerID);
+        if (containerElement == null) return;
+
+        List<VisualElement> containers = Instance.rootDocument.rootVisualElement.Query<VisualElement>(className: "container").ToList();
+        foreach (VisualElement visualElement in containers)
+        {
+            visualElement.RemoveFromClassList("active");
+        }
+        
+        containerElement.AddToClassList("active");
     }
 }
