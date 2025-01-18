@@ -1,3 +1,28 @@
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    visibility: hidden;
+}
+
+.container.active{
+    visibility: visible;
+}
+
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    background-color: rgba(192, 192, 240, .35);
+    padding: 4px 8px 12px;
+    border-width: 2px;
+    border-color: rgba(64, 64, 96, .35);
+}
+
 .unity-label {
     padding: 2px 4px;
     margin: 4px 8px;
@@ -17,4 +42,8 @@
 .info-row .unity-label {
     padding: 2px 4px;
     margin: 0;
+}
+
+.title {
+    margin-bottom: 24px;
 }
